@@ -61,6 +61,8 @@ int print_board(ll board[4][4],ll score){
 int mvm_ask(char* mvm){
 	printf("Faça seu movimento:\n");
 	scanf(" %c", mvm);
+	while ((getchar()) != '\n');
+	return 0;
 }
 bool apply_mvm(char mvm, ll board[][4], ll* score){
 	int sum=0, last = 0, tmp, count;
