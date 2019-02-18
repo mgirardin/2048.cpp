@@ -216,6 +216,38 @@ bool is_full(ll board[4][4]){
 }
 
 bool no_moves(ll board[4][4]){
+	int last;
+	for(int j=0; j<=3; j++){
+		last = 0;
+		for(int i=0; i<3; i++){
+			if (board[i][j]==0){
+				return false;				
+			}
+			else if(last!= 0 && board[i][j]==last){
+				return false;	
+			}
+			else last=board[i][j];
+		}
+		if(last!= 0 && board[3][j]==last){
+			return false;
+		}
+	}
+	for(int i=0; i<=3; i++){
+		last = 0;
+		for(int j=0; j<3; j++){
+			while(board[i][j]==0){
+				return false;
+			}
+			if(last!= 0 && board[i][j]==last){
+				return false;	
+			}
+			else last=board[i][j];
+		}
+		if(last!= 0 && board[i][3]==last){
+			return false;
+		}
+	}
+
 	return true;
 }
 
