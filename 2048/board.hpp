@@ -1,14 +1,16 @@
 #ifndef _board_h
 #define _board_h 
+#include <vector>
+using namespace std;
 
 class Board{
-    long long board[4][4] = {0};
+    vector<vector<int>> board;
     void slide_cells(int x, int y);
 
     public:
     long long score = 0;
     int restart_board();
-    void print();
+    vector<vector<int>> get_cells();
     bool is_full();
     bool no_moves();
     bool apply_movement(char move);

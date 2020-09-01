@@ -4,14 +4,17 @@
 
 class GameSession{
     Board board;
-    void print_welcome();
-    int get_user_command();
-    void get_user_movement(char* mvm);
+    bool game_is_active = true;
 
     public:
-    void Setup();
+    void Start();
     void Play();
-    void Finish(bool* ended, Board board);
+    void Finish();
+    bool is_active();
+    vector<vector<int>> get_board();
+    bool should_end();
+    int get_score();
+    bool make_movement(char move);
 };
 
 #endif

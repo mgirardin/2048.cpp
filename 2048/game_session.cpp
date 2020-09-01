@@ -9,72 +9,34 @@
 #define KNRM "\x1B[0m"
 #define KGRN "\x1B[32m"
 
-void GameSession::print_welcome(){
-    system("clear");
-    printf("\x1B[36m");
-    printf("╔═════════════════════════════════════════════════════════╗\n");
-    printf("║                            2048!                        ║\n");
-    printf("╠═════════════════════════════════════════════════════════╣\n");	
-    printf("║  --  Objetivo: Montar um quadrado de valor 2048      -- ║\n");
-    printf("║  --    	    Comandos: W/A/S/D                  -- ║\n");
-    printf("║  --          Digite G para começar o jogo            -- ║\n");
-    printf("║  --        Digite R para ver o Score Ranking         -- ║\n");
-    printf("║  --    	   Feito por: Girardin                 -- ║\n");
-    printf("╚═════════════════════════════════════════════════════════╝\n");
-    printf(KNRM);
+bool GameSession::is_active(){
+    return game_is_active;
 }
 
-int GameSession::get_user_command(){
-    char start;
-    scanf(" %c", &start);
-    if(start == 'G' || start == 'g');
-    else if(start == 'R' || start == 'r');
-    else{
-        Setup();
-    }
+bool GameSession::should_end(){
+    return board.is_full() && board.no_moves();
 }
 
-void GameSession::get_user_movement(char* mvm){
-    printf("Faça seu movimento:\n");
-	scanf(" %c", mvm);
-	while ((getchar()) != '\n');
+int GameSession::get_score(){
+    return board.score;
 }
 
-void GameSession::Setup(){
-    print_welcome();
-    get_user_command();
+vector<vector<int>> GameSession::get_board(){
+    return board.get_cells();
+}
+
+void GameSession::Start(){
     board.restart_board();
-    system("clear");
 };
 
-void GameSession::Play(){
-    bool ended = false;
-    char move;
-    while(!ended){
-		//Checks if the game is now over
-		if(board.is_full() && board.no_moves()){
-			Finish(&ended, board);
-		}
-		else{	
-			board.print();
-			//Asks user for next movement
-			get_user_movement(&move);
-			//If movement is not valid, continue the loop to prevent new values in the board
-			if(!board.apply_movement(move)){
-                continue;
-            }
-			if(!board.is_full()){
-                board.create_cell();
-            }
-		}
-	}
+bool GameSession::make_movement(char move){
+    bool movement_applied = board.apply_movement(move);
+    if(movement_applied && !board.is_full()){
+        board.create_cell();
+    }
+    return movement_applied;
 }
 
-void GameSession::Finish(bool* ended, Board board){
-    system("clear");
-	board.print();
-	*ended = true;
-	printf(KRED);
-	printf("Game over!\n");
-	printf(KNRM);
+void GameSession::Finish(){
+	game_is_active = false;
 }

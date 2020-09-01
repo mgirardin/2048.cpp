@@ -5,6 +5,7 @@
 #include "board.hpp"
 
 int Board::restart_board(){
+	board = vector<vector<int>>(4, vector<int>(4));
     srand(time(NULL));
 	int size = rand()%10, input, x, y;
 	if(size < 5) size=3;
@@ -38,17 +39,8 @@ void Board::create_cell(){
 	}
 }
 
-void Board::print(){
-    for(int i=0; i<4; i++){
-		printf("|");
-		for(int j=0; j<4;j++){
-			if(board[i][j]!= 0) printf("%lld|", board[i][j]);
-			else printf(" |");
-		}	
-		printf("\n");
-	}	
-	printf("\n");
-	printf("Score: %lld\n", score);
+vector<vector<int>> Board::get_cells(){
+    return board;
 }
 
 bool Board::is_full(){

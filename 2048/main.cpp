@@ -1,7 +1,7 @@
-#include "game_session.hpp"
+#include "cli.hpp"
 
 int main(){
-	GameSession gs = GameSession();
+	CommandLineGame gs = CommandLineGame();
 	gs.Setup();
 	gs.Play();
 	return 0;
