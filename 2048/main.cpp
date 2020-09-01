@@ -1,36 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "gamelib.h"
-
-#define ll long long
+#include "game_session.hpp"
 
 int main(){
-	bool ended = false;		
-	ll board[4][4] = {0};
-	char mvm;
-
-	print_welcome();
-
-	//Initializes random values
-	starting_board(board);
-	system("clear");
-
-	//Game loop
-	while(!ended){
-		//Checks if the game is now over
-		if(is_full(board) && no_moves(board)){
-			end_game(&ended, board, score);
-		}
-		else{	
-			print_board(board, score);
-			//Asks user for next movement
-			mvm_ask(&mvm);
-			//If movement is not valid, continue the loop to prevent new values in the board
-			if(!apply_mvm(mvm, board, &score)) continue;
-			if(!is_full(board)) new_value(board);
-			
-		}
-	}
+	GameSession gs = GameSession();
+	gs.Setup();
+	gs.Play();
 	return 0;
 }
