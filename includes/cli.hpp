@@ -10,6 +10,7 @@ class CommandLineGame{
     void Finish();    
     void print_game(vector<vector<int>>, int score);
     void print_welcome();
+    void show_ranking();
 
     public:
     CommandLineGame();

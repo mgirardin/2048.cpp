@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "../includes/cli.hpp"
+#include "../includes/ranking.hpp"
 
 #define KRED "\x1B[31m"
 #define KNRM "\x1B[0m"
@@ -31,10 +32,19 @@ void CommandLineGame::get_user_command(){
     scanf(" %c", &start);
     start = tolower(start);
     if(start == 'g');
-    else if(start == 'r');
+    else if(start == 'r'){
+        system("clear");
+        show_ranking();
+    }
     else{
         Setup();
     }
+}
+
+void CommandLineGame::show_ranking(){
+    Ranking rk = Ranking();
+    rk.print_ranking();
+    Setup();
 }
 
 void CommandLineGame::get_user_movement(char* mvm){
