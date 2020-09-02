@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <string>
 #include "board.hpp"
 
+// Public methods 
 int Board::restart_board(){
 	board = vector<vector<int>>(4, vector<int>(4));
     srand(time(NULL));
@@ -89,150 +91,118 @@ bool Board::no_moves(){
 	return true;
 }
 
-// TODO: Implement this to improve apply_movement
-void Board::slide_cells(int x, int y){
-}
-
-// TODO: Refactor this monster
+// TODO: Refactor this monster (now just a little monster, was way worse)
 bool Board::apply_movement(char move){
     move = tolower(move);
-    int sum=0, last = 0, tmp, count;
-	if(move == 'd'){
-		for(int i=0; i<=3; i++){
-			last = 0;
-			for(int j=3; j>0; j--){
-				count = 0;
-				while(board[i][j]==0 && count<3){
-					tmp=j;
-					while(tmp>=1){
-						board[i][tmp]=board[i][tmp-1];	
-						tmp--;				
-					}
-					board[i][0]=0;
-					count++;
-				}
-				if(last!= 0 && board[i][j]==last){
-					board[i][j+1]*=2;	
-					score += board[i][j+1];
-					last=0;
-					board[i][j]=0;
-					j++;	
-				}
-				else last=board[i][j];
-			}	
-			if(last!= 0 && board[i][0]==last){
-				board[i][1]*=2;		
-				score += board[i][1];
-				last=0;
-				board[i][0]=0;
-
-			}
-			
-		}
-		system("clear");
-		return true;
+	bool isValidMove = false;
+    if(move == 'd'){
+		slide_cells(-1, 0);
+		isValidMove = true;
 	}
-	else if(move =='s'){
-		for(int j=0; j<=3; j++){
-			last = 0;
-			for(int i=3; i>0; i--){
-				count = 0;
-				while(board[i][j]==0 && count<3){
-					tmp=i;
-					while(tmp>=1){
-						board[tmp][j]=board[tmp-1][j];	
-						tmp--;				
-					}
-					board[0][j]=0;
-					count++;
-				}
-				if(last!= 0 && board[i][j]==last){
-					board[i+1][j]*=2;
-					score += board[i+1][j];
-					last=0;
-					board[i][j]=0;
-					i++;	
-				}
-				else last=board[i][j];
-			}
-			if(last!= 0 && board[0][j]==last){
-				board[1][j]*=2;	
-				score += board[1][j];
-				last=0;
-				board[0][j]=0;
-
-			}
-		}
-		system("clear");
-		return true;
+	if(move == 'a'){
+		slide_cells(1, 0);
+		isValidMove = true;
 	}
-	else if(move =='a'){
-		for(int i=0; i<=3; i++){
-			last = 0;
-			for(int j=0; j<3; j++){
-				count = 0;
-				while(board[i][j]==0 && count<3){
-					tmp=j;
-					while(tmp<=2){
-						board[i][tmp]=board[i][tmp+1];	
-						tmp++;				
-					}
-					board[i][3]=0;
-					count++;
-				}
-				if(last!= 0 && board[i][j]==last){
-					board[i][j-1]*=2;
-					score += board[i][j-1];
-					last=0;
-					board[i][j]=0;
-					j--;	
-				}
-				else last=board[i][j];
-			}
-			if(last!= 0 && board[i][3]==last){
-				board[i][2]*=2;
-				score += board[i][2];
-				last=0;
-				board[i][3]=0;
-			}
-		}
-		system("clear");
-		return true;
+	if(move == 'w'){
+		slide_cells(0, 1);
+		isValidMove = true;
 	}
-	else if(move =='w'){
-		for(int j=0; j<=3; j++){
-			last = 0;
-			for(int i=0; i<3; i++){
-				count = 0;
-				while(board[i][j]==0 && count<3){
-					tmp=i;
-					while(tmp<=2){
-						board[tmp][j]=board[tmp+1][j];	
-						tmp++;				
-					}
-					board[3][j]=0;
-					count++;
-				}
-				if(last!= 0 && board[i][j]==last){
-					board[i-1][j]*=2;
-					score += board[i-1][j];
-					last=0;
-					board[i][j]=0;
-					i--;	
-				}
-				else last=board[i][j];
-			}
-			if(last!= 0 && board[3][j]==last){
-				board[2][j]*=2;
-				score += board[2][j];
-				last=0;
-				board[3][j]=0;
-
-			}
-		}
-		system("clear");
-		return true;
+	if(move == 's'){
+		slide_cells(0, -1);
+		isValidMove = true;
 	}
 	system("clear");
-	return false;
+	return isValidMove;
+}
+
+// Private methods
+void Board::slide_column(int column, int direction){
+	if(direction == 0){
+		return;
+	}
+	if(direction != 1 and direction != -1){
+		throw string("Column slide direction must be be 0, 1 or -1");
+	}
+	if(column<0 or column>size-1){
+		throw string("Column to slide must not be < 0 or >= board size");
+	}
+
+	vector<vector<int>> temp_board = board;
+	for(int i=0; i<size; i++){
+		for(int j=0; j<size; j++){
+			temp_board[j][i] = board[i][j];
+		}
+	}
+	board = temp_board;
+
+	slide_line(column, direction);
+
+	vector<vector<int>> new_board = board;
+	for(int i=0; i<size; i++){
+		for(int j=0; j<size; j++){
+			new_board[j][i] = board[i][j];
+		}
+	}
+	board = new_board;
+}
+
+//direction == 1 -> LEFT / UP
+//direction ==-1 -> RIGHT / DOWN
+void Board::slide_line(int line, int direction){
+	if(direction == 0){
+		return;
+	}
+	if(direction != 1 and direction != -1){
+		throw string("Line slide direction must be be 0, 1 or -1");
+	}
+	if(line<0 or line>size-1){
+		throw string("Line to slide must not be < 0 or >= board size");
+	}
+	int start = direction == -1 ? size-1 : 0;
+	slide_line(line, direction, start, 0);
+}
+
+void Board::slide_line(int line, int direction, int start, int counter = 0){
+	if(direction == 1 and start >= size-1 || direction == -1 and start <= 0){
+		return;
+	}
+	/*
+		Counter needed to avoid infinite recursion calls for full sequence of 0s;
+		We need to stay in the same cell when we delete the current cell (value 0), otherwise we
+		jump the next number, but it could cause infinite recursion calls
+	*/
+	if(counter>size){
+		return;
+	}
+	int position_to_insert = direction == 1 ? size-1 : 0;
+	auto remove_cell_and_insert_zero = [](vector<vector<int>> &board, int line, 
+											int position_to_remove, int position_to_insert){ 
+        board[line].erase(board[line].begin()+position_to_remove);
+		board[line].insert(board[line].begin() + position_to_insert, 0);
+    };
+	//Current cell == 0
+	if(board[line][start] == 0){
+		remove_cell_and_insert_zero(board, line, start, position_to_insert);
+		start-=direction;
+	}
+	//Next cell == 0
+	else if(board[line][start+direction] == 0){
+		remove_cell_and_insert_zero(board, line, start+direction, position_to_insert);
+		start-=direction;
+	}
+	//Current cell == next cell
+	if(board[line][start] == board[line][start+direction]){
+		board[line][start] += board[line][start+direction];
+		remove_cell_and_insert_zero(board, line, start + direction, position_to_insert);
+		score += board[line][start];
+	}
+	counter++;
+	slide_line(line, direction, start+direction, counter);  
+}
+
+void Board::slide_cells(int line_direction, int column_direction){
+	for(int i=0; i<size; i++){
+		slide_line(i, line_direction);
+		slide_column(i, column_direction);
+	}
 }
