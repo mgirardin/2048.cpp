@@ -26,7 +26,7 @@ void CommandLineGame::print_welcome(){
     printf(KNRM);
 }
 
-int CommandLineGame::get_user_command(){
+void CommandLineGame::get_user_command(){
     char start;
     scanf(" %c", &start);
     start = tolower(start);

@@ -5,7 +5,7 @@
 class CommandLineGame{
     GameSession game;
 
-    int get_user_command();
+    void get_user_command();
     void get_user_movement(char* mvm);
     void Finish();    
     void print_game(vector<vector<int>>, int score);
