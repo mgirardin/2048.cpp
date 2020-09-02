@@ -68,12 +68,11 @@ void CommandLineGame::Play(){
     while(game.is_active()){
         print_game(game.get_board(), game.get_score());
         get_user_movement(&move);
-        if(!game.make_movement(move)){
-            continue;
-        }
+        game.make_movement(move);
         if(game.should_end()){
             game.Finish();
         }
+        system("clear");
 	}
     Finish();
 }

@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string>
+#include <unordered_map>
 #include "board.hpp"
 
 // Public methods 
@@ -91,28 +92,19 @@ bool Board::no_moves(){
 	return true;
 }
 
-// TODO: Refactor this monster (now just a little monster, was way worse)
 bool Board::apply_movement(char move){
     move = tolower(move);
-	bool isValidMove = false;
-    if(move == 'd'){
-		slide_cells(-1, 0);
-		isValidMove = true;
+	unordered_map<char, pair<int, int>> moves = {
+		{'d', make_pair(-1,  0)}, 
+		{'a', make_pair( 1,  0)},
+		{'w', make_pair( 0,  1)},
+		{'s', make_pair( 0, -1)}
+	};
+	if(moves.find(move) == moves.end()){
+		return false;
 	}
-	if(move == 'a'){
-		slide_cells(1, 0);
-		isValidMove = true;
-	}
-	if(move == 'w'){
-		slide_cells(0, 1);
-		isValidMove = true;
-	}
-	if(move == 's'){
-		slide_cells(0, -1);
-		isValidMove = true;
-	}
-	system("clear");
-	return isValidMove;
+	slide_cells(moves[move]);
+	return true;
 }
 
 // Private methods
@@ -200,9 +192,9 @@ void Board::slide_line(int line, int direction, int start, int counter = 0){
 	slide_line(line, direction, start+direction, counter);  
 }
 
-void Board::slide_cells(int line_direction, int column_direction){
+void Board::slide_cells(pair<int,int> directions){
 	for(int i=0; i<size; i++){
-		slide_line(i, line_direction);
-		slide_column(i, column_direction);
+		slide_line(i, directions.first);
+		slide_column(i, directions.second);
 	}
 }

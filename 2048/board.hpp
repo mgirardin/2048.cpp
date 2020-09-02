@@ -5,9 +5,8 @@ using namespace std;
 
 class Board{
     vector<vector<int>> board;
-    void slide_cells(int x, int y);
     int size = 4;
-    void slide_cells();
+    void slide_cells(pair<int, int> directions);
     void slide_line(int line, int direction);
     void slide_line(int line, int direction, int start, int counter);
     void slide_column(int column, int direction);
