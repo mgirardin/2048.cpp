@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "game_session.hpp"
-#include "board.hpp"
+#include "../includes/game_session.hpp"
+#include "../includes/board.hpp"
 
 #define ll long long
 #define KRED "\x1B[31m"

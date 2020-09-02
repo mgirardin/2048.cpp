@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "cli.hpp"
+#include "../includes/cli.hpp"
 
 #define KRED "\x1B[31m"
 #define KNRM "\x1B[0m"
