@@ -10,6 +10,7 @@ class Board{
     void slide_line(int line, int direction);
     void slide_line(int line, int direction, int start, int counter);
     void slide_column(int column, int direction);
+    int get_random_cell_value();
 
     public:
     long long score = 0;

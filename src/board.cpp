@@ -8,33 +8,29 @@
 
 // Public methods 
 int Board::restart_board(){
-	board = vector<vector<int>>(4, vector<int>(4));
-    srand(time(NULL));
-	int size = rand()%10, input, x, y;
-	if(size < 5) size=3;
-	else size=2;
-	for(int i=0; i<=size-1; i++){
-		input = (rand()%10 < 1) ? 4 : 2;
-		x = rand()%4;
-		y = rand()%4;
-		board[x][y] = input;
+	board = vector<vector<int>>(size, vector<int>(size));
+	int cells_to_fill = rand()%10 < 5 ? 3 : 2;
+	for(int i=0; i<=cells_to_fill-1; i++){
+		int input = get_random_cell_value();
+		srand(time(NULL));
+		int x_position = rand()%size;
+		int y_position = rand()%size;
+		board[x_position][y_position] = input;
 	}
 	return 1;
 }
 
 void Board::create_cell(){
-    int value = rand()%10, iterations = rand()%100;
-	bool found=false;
-	if(value < 2) value=4;
-	else value=2;
-	while(!found){
-		for(int i=0; i<4; i++){
-			for(int j=0; j<4;j++){
-				if(board[i][j]==0){
-					if(iterations==0){	
-						board[i][j]=value;
-						found=true;
-					}
+    int iterations = rand()%100, value = get_random_cell_value();
+	bool cell_found=false;
+	while(!cell_found){
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size and cell_found==false;j++){
+				if(board[i][j] == 0 and iterations == 0){
+					board[i][j]=value;
+					cell_found=true;
+				}
+				if(iterations>0){
 					iterations--;
 				}
 			}	
@@ -47,8 +43,8 @@ vector<vector<int>> Board::get_cells(){
 }
 
 bool Board::is_full(){
-    for(int i=0; i<4; i++){
-		for(int j=0; j<4;j++){
+    for(int i=0; i<size; i++){
+		for(int j=0; j<size;j++){
 			if(board[i][j]==0){
 				return false;
 			}
@@ -119,23 +115,18 @@ void Board::slide_column(int column, int direction){
 		throw string("Column to slide must not be < 0 or >= board size");
 	}
 
-	vector<vector<int>> temp_board = board;
-	for(int i=0; i<size; i++){
-		for(int j=0; j<size; j++){
-			temp_board[j][i] = board[i][j];
+	auto rotate_matrix = [](vector<vector<int>> board, int size){
+		vector<vector<int>> temp_board = board;
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size; j++){
+				temp_board[j][i] = board[i][j];
+			}
 		}
-	}
-	board = temp_board;
-
+		return temp_board;
+	};
+	board = rotate_matrix(board, size);
 	slide_line(column, direction);
-
-	vector<vector<int>> new_board = board;
-	for(int i=0; i<size; i++){
-		for(int j=0; j<size; j++){
-			new_board[j][i] = board[i][j];
-		}
-	}
-	board = new_board;
+	board = rotate_matrix(board, size);
 }
 
 //direction == 1 -> LEFT / UP
@@ -197,4 +188,10 @@ void Board::slide_cells(pair<int,int> directions){
 		slide_line(i, directions.first);
 		slide_column(i, directions.second);
 	}
+}
+
+int Board::get_random_cell_value(){
+	srand(time(NULL));
+	int val = (rand()%10 < 2) ? 4 : 2;
+	return val;
 }

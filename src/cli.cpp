@@ -51,9 +51,10 @@ void CommandLineGame::Setup(){
 }
 
 void CommandLineGame::print_game(vector<vector<int>> board, int score){
-    for(int i=0; i<4; i++){
+    int board_size = board.size();
+    for(int i=0; i<board_size; i++){
 		printf("|");
-		for(int j=0; j<4;j++){
+		for(int j=0; j<board_size;j++){
 			if(board[i][j]!= 0) printf("%d|", board[i][j]);
 			else printf(" |");
 		}	
