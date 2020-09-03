@@ -14,7 +14,7 @@ class Ranking{
     public:
     Ranking();
     void print_ranking();
-    bool create_record(int points, string nickname);
+    bool create_record(int points, const string &nickname);
 };
 
 #endif

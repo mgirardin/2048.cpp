@@ -9,9 +9,7 @@
 #define KNRM "\x1B[0m"
 #define KGRN "\x1B[32m"
 
-CommandLineGame::CommandLineGame(){
-    game = GameSession();
-}
+CommandLineGame::CommandLineGame(): game(GameSession()){}
 
 void CommandLineGame::print_welcome(){
     system("clear");

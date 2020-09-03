@@ -45,19 +45,17 @@ vector<pair<string, int>> Ranking::get_user_points(){
     vector<pair<string, int>> user_points;
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(db, "select points, nickname from ranking;", -1, &stmt, 0);
-    int points;
-    string name;
     sqlite3_step(stmt);
     while( sqlite3_column_text(stmt, 0)){
-        points = sqlite3_column_int(stmt, 0);
-        name = string(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
+        int points = sqlite3_column_int(stmt, 0);
+        string name = string(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
         user_points.push_back(make_pair(name, points));
         sqlite3_step(stmt);
     }
     return user_points;
 }
 
-bool Ranking::create_record(int points, string nickname){
+bool Ranking::create_record(int points, const string &nickname){
     char *err;
     stringstream ss;
     // TODO: sqlite injection rsrsrsrsrsrs
