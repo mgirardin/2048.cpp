@@ -17,6 +17,7 @@ int Board::restart_board(){
 		int y_position = rand()%size;
 		board[x_position][y_position] = input;
 	}
+	score = 0;
 	return 1;
 }
 

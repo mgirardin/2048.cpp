@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include <time.h>
 #include "../includes/game_session.hpp"
 #include "../includes/board.hpp"
+#include "../includes/ranking.hpp"
 
 #define ll long long
 #define KRED "\x1B[31m"
@@ -26,6 +28,7 @@ vector<vector<int>> GameSession::get_board(){
 }
 
 void GameSession::Start(){
+    game_is_active = true;
     board.restart_board();
 };
 
@@ -39,4 +42,14 @@ bool GameSession::make_movement(char move){
 
 void GameSession::Finish(){
 	game_is_active = false;
+}
+
+bool GameSession::Save_Score(){
+    Ranking rk = Ranking();
+    printf("Score: %lld\n", board.score);
+    printf("Digite seu nickname: ");
+    string nickname;
+    // TODO: Fix it to accept space (whitespace)
+    cin >> nickname;
+    return rk.create_record(board.score, nickname);
 }

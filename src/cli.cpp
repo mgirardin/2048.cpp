@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <iostream>
 #include "../includes/cli.hpp"
 #include "../includes/ranking.hpp"
 
@@ -91,7 +92,28 @@ void CommandLineGame::Play(){
 void CommandLineGame::Finish(){
     system("clear");
 	print_game(game.get_board(), game.get_score());
-	printf(KRED);
-	printf("Game over!\n");
-	printf(KNRM);
+	printf("%sGame over!\n%s", KRED, KNRM);
+    printf("\n\nDeseja salvar seu resultado no ranking? (y/N)\n");
+    char choice;
+    scanf("%c", &choice);
+    choice = tolower(choice);
+    if(choice == 'y'){
+        save_score();
+    }
+    Setup();
+    Play();
+}
+
+void CommandLineGame::save_score(){
+    system("clear");
+    if(game.Save_Score()){
+        printf("Score salvo com sucesso!\n\n");
+    }
+    else{
+        printf("Erro ao salvar score :(\n\n");
+    }
+    printf("Pressione enter para voltar a tela inicial.\n");
+    cin.ignore();
+    cin.ignore();
+    return;
 }

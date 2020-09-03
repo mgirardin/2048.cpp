@@ -10,6 +10,7 @@ class GameSession{
     void Start();
     void Play();
     void Finish();
+    bool Save_Score();
     bool is_active();
     vector<vector<int>> get_board();
     bool should_end();

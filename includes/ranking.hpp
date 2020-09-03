@@ -7,12 +7,14 @@ using namespace std;
 
 class Ranking{
     sqlite3 *db;
+    int number_of_records = 10;
     vector<pair<string, int>> get_user_points(); 
     vector<pair<string, int>> sort_ranking(vector<pair<string, int>>);
     
     public:
     Ranking();
     void print_ranking();
+    bool create_record(int points, string nickname);
 };
 
 #endif
