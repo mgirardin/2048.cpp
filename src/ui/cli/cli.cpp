@@ -3,8 +3,9 @@
 #include <ctype.h>
 #include <iostream>
 #include <iomanip>
-#include "includes/cli.hpp"
-#include "../engine/includes/ranking.hpp"
+#include "../includes/cli.hpp"
+#include "../../engine/includes/ranking.hpp"
+#include "../includes/terminal.hpp"
 
 #define KRED "\x1B[31m"
 #define KNRM "\x1B[0m"
@@ -23,17 +24,9 @@ void CommandLineGame::print_menu_delimiter(string start_char, string end_char, c
         cout << setfill(' ');
 }
 
-void CommandLineGame::clear_screen(){
-    #ifdef WINDOWS
-        std::system("cls");
-    #else
-        std::system ("clear");
-    #endif
-}
-
 void CommandLineGame::print_menu(){    
     // TODO: Use '═' (unicode) as a filler (is it possible? );
-    clear_screen();
+    Terminal::clear_screen();
     cout << KBLUE;
     print_menu_delimiter("╔", "╗", '*');
     cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << "2048.cpp" << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
@@ -42,18 +35,18 @@ void CommandLineGame::print_menu(){
     print_menu_instruction("Comandos: W/A/S/D");
     print_menu_instruction("Digite G para comecar o jogo");
     print_menu_instruction("Digite R para ver o Score Ranking");
-    print_menu_instruction("Feito por: Girardin");
     print_menu_delimiter("╚","╝", '-');
     cout << KNRM;
 }
 
 void CommandLineGame::get_user_command(){
     char start;
-    scanf(" %c", &start);
+    Terminal::get_user_char(&start);
     start = tolower(start);
     if(start == 'g');
     else if(start == 'r'){
-        clear_screen();
+        
+        Terminal::clear_screen();
         show_ranking();
     }
     else{
@@ -62,22 +55,27 @@ void CommandLineGame::get_user_command(){
 }
 
 void CommandLineGame::show_ranking(){
-    Ranking rk = Ranking();
-    rk.print_ranking();
+    Ranking rk = Ranking();    
+    vector<pair<string, int>> ranking = rk.get_ranking();
+    cout << "Ranking:" << endl;
+    for(int i=0; i<ranking.size(); i++){
+        cout << i+1 << ")" << ranking[i].first << " - " << ranking[i].second << endl;
+    }
+    cout << endl << "Pressione enter para voltar para a tela inicial." << endl;
+    cin.ignore();
     Setup();
 }
 
 void CommandLineGame::get_user_movement(char* mvm){
     printf("Faça seu movimento:\n");
-	scanf(" %c", mvm);
-	while ((getchar()) != '\n');
+    Terminal::get_user_char(mvm);
 }
 
 void CommandLineGame::Setup(){
     game.Start();
     print_menu();
     get_user_command();
-    clear_screen();
+    Terminal::clear_screen();
 }
 
 void CommandLineGame::print_game(vector<vector<int>> board, int score){
@@ -111,13 +109,13 @@ void CommandLineGame::Play(){
         if(game.should_end()){
             game.Finish();
         }
-        clear_screen();
+        Terminal::clear_screen();
 	}
     Finish();
 }
 
 void CommandLineGame::Finish(){
-    clear_screen();
+    Terminal::clear_screen();
 	print_game(game.get_board(), game.get_score());
 	printf("%sGame over!\n%s", KRED, KNRM);
     printf("\n\nDeseja salvar seu resultado no ranking? (y/N)\n");
@@ -132,7 +130,7 @@ void CommandLineGame::Finish(){
 }
 
 void CommandLineGame::save_score(){
-    clear_screen();
+    Terminal::clear_screen();
     if(game.Save_Score()){
         printf("Score salvo com sucesso!\n\n");
     }

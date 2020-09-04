@@ -13,7 +13,7 @@ class Ranking{
     
     public:
     Ranking();
-    void print_ranking();
+    vector<pair<string, int>> get_ranking();
     bool create_record(int points, const string &nickname);
 };
 

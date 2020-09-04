@@ -21,16 +21,18 @@ Ranking::Ranking(){
     }
 }
 
-void Ranking::print_ranking(){
+vector<pair<string, int>> Ranking::get_ranking(){
     vector<pair<string, int>> user_points = get_user_points();
     user_points = sort_ranking(user_points);
-    printf("Ranking:\n");
-    for(int i=0; i<min((int)user_points.size(), number_of_records); i++){
-        cout << i+1 << ")" << user_points[i].first << " - " << user_points[i].second << endl;
-    }
-    printf("\nPressione enter para voltar para a tela inicial.\n");
-    cin.ignore();
-    cin.ignore();
+    auto get_subvector = [](vector<pair<string, int>> vec1, int size){
+        auto first = vec1.cbegin();
+        size = vec1.size()>=size ? size : vec1.size();
+        auto last = vec1.cbegin() + size;
+        vector<pair<string, int>> vec2(first, last);
+        return vec2;
+    };
+    user_points = get_subvector(user_points, number_of_records);
+    return user_points;
 }
 
 vector<pair<string, int>> Ranking::sort_ranking(vector<pair<string, int>> user_points){

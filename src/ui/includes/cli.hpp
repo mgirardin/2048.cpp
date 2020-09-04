@@ -13,7 +13,6 @@ class CommandLineGame{
     void print_menu();
     void print_menu_instruction(string instruction);
     void print_menu_delimiter(string start_char, string end_char, char fill);
-    void clear_screen();
     void show_ranking();
     void save_score();
 
