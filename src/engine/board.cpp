@@ -176,7 +176,7 @@ void Board::slide_line(int line, int direction, int start, int counter = 0){
 		start-=direction;
 	}
 	//Current cell == next cell
-	if(board[line][start] == board[line][start+direction]){
+	else if(board[line][start] == board[line][start+direction]){
 		board[line][start] += board[line][start+direction];
 		remove_cell_and_insert_zero(board, line, start + direction, position_to_insert);
 		score += board[line][start];
