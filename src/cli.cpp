@@ -23,9 +23,17 @@ void CommandLineGame::print_menu_delimiter(string start_char, string end_char, c
         cout << setfill(' ');
 }
 
+void CommandLineGame::clear_screen(){
+    #ifdef WINDOWS
+        std::system("cls");
+    #else
+        std::system ("clear");
+    #endif
+}
+
 void CommandLineGame::print_menu(){    
     // TODO: Use '═' (unicode) as a filler (is it possible? );
-    system("clear");
+    clear_screen();
     cout << KBLUE;
     print_menu_delimiter("╔", "╗", '*');
     cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << "2048.cpp" << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
@@ -45,7 +53,7 @@ void CommandLineGame::get_user_command(){
     start = tolower(start);
     if(start == 'g');
     else if(start == 'r'){
-        system("clear");
+        clear_screen();
         show_ranking();
     }
     else{
@@ -69,7 +77,7 @@ void CommandLineGame::Setup(){
     game.Start();
     print_menu();
     get_user_command();
-    system("clear");
+    clear_screen();
 }
 
 void CommandLineGame::print_game(vector<vector<int>> board, int score){
@@ -103,13 +111,13 @@ void CommandLineGame::Play(){
         if(game.should_end()){
             game.Finish();
         }
-        system("clear");
+        clear_screen();
 	}
     Finish();
 }
 
 void CommandLineGame::Finish(){
-    system("clear");
+    clear_screen();
 	print_game(game.get_board(), game.get_score());
 	printf("%sGame over!\n%s", KRED, KNRM);
     printf("\n\nDeseja salvar seu resultado no ranking? (y/N)\n");
@@ -124,7 +132,7 @@ void CommandLineGame::Finish(){
 }
 
 void CommandLineGame::save_score(){
-    system("clear");
+    clear_screen();
     if(game.Save_Score()){
         printf("Score salvo com sucesso!\n\n");
     }
