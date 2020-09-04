@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <unordered_map>
-#include "../includes/board.hpp"
+#include "includes/board.hpp"
 
 // Public methods 
 int Board::restart_board(){

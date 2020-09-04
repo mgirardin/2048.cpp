@@ -1,4 +1,4 @@
-#include "../includes/cli.hpp"
+#include "ui/includes/cli.hpp"
 
 int main(){
 	CommandLineGame gs = CommandLineGame();

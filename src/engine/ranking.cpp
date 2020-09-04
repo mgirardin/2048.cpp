@@ -1,11 +1,11 @@
-#include "../includes/ranking.hpp"
-#include "../libraries/sqlite/sqlite3.h"
 #include <stdio.h>
 #include <sstream>
 #include <iostream>
 #include <stdlib.h>
 #include <algorithm>
 #include <math.h>
+#include "includes/ranking.hpp"
+#include "../../libraries/sqlite/sqlite3.h"
 using namespace std;
 
 Ranking::Ranking(){

@@ -1,6 +1,6 @@
 #ifndef _ranking_h
 #define _ranking_h 
-#include "../libraries/sqlite/sqlite3.h"
+#include "../../../libraries/sqlite/sqlite3.h"
 #include <vector>
 #include <string>
 using namespace std;

@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <iostream>
 #include <time.h>
-#include "../includes/game_session.hpp"
-#include "../includes/board.hpp"
-#include "../includes/ranking.hpp"
+#include "includes/game_session.hpp"
+#include "includes/board.hpp"
+#include "includes/ranking.hpp"
 
 #define ll long long
 #define KRED "\x1B[31m"

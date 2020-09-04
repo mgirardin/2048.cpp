@@ -3,8 +3,8 @@
 #include <ctype.h>
 #include <iostream>
 #include <iomanip>
-#include "../includes/cli.hpp"
-#include "../includes/ranking.hpp"
+#include "includes/cli.hpp"
+#include "../engine/includes/ranking.hpp"
 
 #define KRED "\x1B[31m"
 #define KNRM "\x1B[0m"

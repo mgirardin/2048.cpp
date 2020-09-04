@@ -1,7 +1,7 @@
 #ifndef _cli_h
 #define _cli_h 
 #include <string>
-#include "game_session.hpp"
+#include "../../engine/includes/game_session.hpp"
 
 class CommandLineGame{
     GameSession game;
