@@ -100,8 +100,9 @@ bool Board::apply_movement(char move){
 	if(moves.find(move) == moves.end()){
 		return false;
 	}
+	vector<vector<int>> previous_board = board;
 	slide_cells(moves[move]);
-	return true;
+	return previous_board!=board;
 }
 
 // Private methods
