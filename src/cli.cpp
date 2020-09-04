@@ -2,28 +2,41 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <iostream>
+#include <iomanip>
 #include "../includes/cli.hpp"
 #include "../includes/ranking.hpp"
 
 #define KRED "\x1B[31m"
 #define KNRM "\x1B[0m"
 #define KGRN "\x1B[32m"
+#define KBLUE "\x1B[36m"
+#define MENU_LINE_SIZE 70
 
 CommandLineGame::CommandLineGame(): game(GameSession()){}
 
-void CommandLineGame::print_welcome(){
+void CommandLineGame::print_menu_instruction(string instruction){
+    cout << "║" << left << setw(57) << "  --  " + instruction << right << setw(MENU_LINE_SIZE-57) << "--  ║" << endl;
+}
+
+void CommandLineGame::print_menu_delimiter(string start_char, string end_char, char fill){
+        cout << start_char << setfill(fill) << setw(MENU_LINE_SIZE) << end_char << endl;
+        cout << setfill(' ');
+}
+
+void CommandLineGame::print_menu(){    
+    // TODO: Use '═' (unicode) as a filler (is it possible? );
     system("clear");
-    printf("\x1B[36m");
-    printf("╔═════════════════════════════════════════════════════════╗\n");
-    printf("║                            2048!                        ║\n");
-    printf("╠═════════════════════════════════════════════════════════╣\n");	
-    printf("║  --  Objetivo: Montar um quadrado de valor 2048      -- ║\n");
-    printf("║  --    	    Comandos: W/A/S/D                  -- ║\n");
-    printf("║  --          Digite G para começar o jogo            -- ║\n");
-    printf("║  --        Digite R para ver o Score Ranking         -- ║\n");
-    printf("║  --    	   Feito por: Girardin                 -- ║\n");
-    printf("╚═════════════════════════════════════════════════════════╝\n");
-    printf(KNRM);
+    cout << KBLUE;
+    print_menu_delimiter("╔", "╗", '*');
+    cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << "2048.cpp" << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
+    print_menu_delimiter("║", "║", '*');
+    print_menu_instruction("Objetivo: Montar um quadrado de valor 2048");
+    print_menu_instruction("Comandos: W/A/S/D");
+    print_menu_instruction("Digite G para comecar o jogo");
+    print_menu_instruction("Digite R para ver o Score Ranking");
+    print_menu_instruction("Feito por: Girardin");
+    print_menu_delimiter("╚","╝", '-');
+    cout << KNRM;
 }
 
 void CommandLineGame::get_user_command(){
@@ -54,18 +67,26 @@ void CommandLineGame::get_user_movement(char* mvm){
 
 void CommandLineGame::Setup(){
     game.Start();
-    print_welcome();
+    print_menu();
     get_user_command();
     system("clear");
 }
 
 void CommandLineGame::print_game(vector<vector<int>> board, int score){
     int board_size = board.size();
+    int max_cell_value = INT32_MIN;
+    for(int i=0; i<board_size; i++){
+        for(int j=0; j<board_size; j++){
+            int cell_value = board[i][j];
+            max_cell_value = (cell_value>max_cell_value) ? cell_value : max_cell_value;
+        }
+    }
+    int max_number_of_digits = to_string(max_cell_value).size();
     for(int i=0; i<board_size; i++){
 		printf("|");
 		for(int j=0; j<board_size;j++){
-			if(board[i][j]!= 0) printf("%d|", board[i][j]);
-			else printf(" |");
+            string cell_value = board[i][j] != 0 ? to_string(board[i][j]) : " ";
+            cout << setw(max_number_of_digits) << cell_value << "|";
 		}	
 		printf("\n");
 	}	
