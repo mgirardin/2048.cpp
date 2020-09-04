@@ -1,15 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
-#include <time.h>
 #include "includes/game_session.hpp"
 #include "includes/board.hpp"
 #include "includes/ranking.hpp"
 
-#define ll long long
-#define KRED "\x1B[31m"
-#define KNRM "\x1B[0m"
-#define KGRN "\x1B[32m"
 
 bool GameSession::is_active(){
     return game_is_active;

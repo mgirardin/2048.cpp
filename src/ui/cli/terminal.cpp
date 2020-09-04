@@ -5,6 +5,7 @@
 void Terminal::clear_screen(){
     #ifdef WINDOWS
         system("cls");
+        #error Not ready for Windows
     #else
         system("clear");
     #endif
@@ -13,6 +14,7 @@ void Terminal::clear_screen(){
 void Terminal::get_user_char(char* c){
     #ifdef WINDOWS
         // TODO: Implement this to Windows 
+        #error Not ready for Windows
     #else
         system("/bin/stty raw");
         scanf(" %c", c);

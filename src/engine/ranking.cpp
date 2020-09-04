@@ -1,7 +1,4 @@
-#include <stdio.h>
 #include <sstream>
-#include <iostream>
-#include <stdlib.h>
 #include <algorithm>
 #include <math.h>
 #include "includes/ranking.hpp"

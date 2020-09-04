@@ -1,8 +1,3 @@
-#include <time.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <string>
 #include <unordered_map>
 #include "includes/board.hpp"
 
