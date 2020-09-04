@@ -6,6 +6,34 @@
 Fully configurable CLI version of the game 2048
 
 
-
-
 WIP
+
+## Setup
+
+### Requirements
+
+* C++11 compiler (e.g. `g++`)
+* CMake
+
+### Build
+
+1. Clone this project
+```sh
+git clone https://github.com/mgirardin/2048.cpp.git
+```
+2. Enter the project's build directory (or create one):
+```sh
+cd 2048.cpp/build
+```
+3. Generate Makefile 
+```sh
+cmake ..
+```
+4. Build
+```sh
+make
+```
+5. Run the program
+```sh
+./2048cpp
+```
