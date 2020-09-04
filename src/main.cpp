@@ -1,8 +1,8 @@
 #include "ui/includes/cli.hpp"
+#include "ui/includes/menu.hpp"
 
 int main(){
-	CommandLineGame gs = CommandLineGame();
-	gs.Setup();
-	gs.Play();
+	MainMenu menu = MainMenu();
+	menu.open();
 	return 0;
 }

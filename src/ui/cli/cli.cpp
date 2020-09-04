@@ -15,67 +15,9 @@
 
 CommandLineGame::CommandLineGame(): game(GameSession()){}
 
-void CommandLineGame::print_menu_instruction(string instruction){
-    cout << "║" << left << setw(57) << "  --  " + instruction << right << setw(MENU_LINE_SIZE-57) << "--  ║" << endl;
-}
-
-void CommandLineGame::print_menu_delimiter(string start_char, string end_char, char fill){
-        cout << start_char << setfill(fill) << setw(MENU_LINE_SIZE) << end_char << endl;
-        cout << setfill(' ');
-}
-
-void CommandLineGame::print_menu(){    
-    // TODO: Use '═' (unicode) as a filler (is it possible? );
-    Terminal::clear_screen();
-    cout << KBLUE;
-    print_menu_delimiter("╔", "╗", '*');
-    cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << "2048.cpp" << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
-    print_menu_delimiter("║", "║", '*');
-    print_menu_instruction("Objetivo: Montar um quadrado de valor 2048");
-    print_menu_instruction("Comandos: W/A/S/D");
-    print_menu_instruction("Digite G para comecar o jogo");
-    print_menu_instruction("Digite R para ver o Score Ranking");
-    print_menu_delimiter("╚","╝", '-');
-    cout << KNRM;
-}
-
-void CommandLineGame::get_user_command(){
-    char start;
-    Terminal::get_user_char(&start);
-    start = tolower(start);
-    if(start == 'g');
-    else if(start == 'r'){
-        
-        Terminal::clear_screen();
-        show_ranking();
-    }
-    else{
-        Setup();
-    }
-}
-
-void CommandLineGame::show_ranking(){
-    Ranking rk = Ranking();    
-    vector<pair<string, int>> ranking = rk.get_ranking();
-    cout << "Ranking:" << endl;
-    for(int i=0; i<ranking.size(); i++){
-        cout << i+1 << ")" << ranking[i].first << " - " << ranking[i].second << endl;
-    }
-    cout << endl << "Pressione enter para voltar para a tela inicial." << endl;
-    cin.ignore();
-    Setup();
-}
-
 void CommandLineGame::get_user_movement(char* mvm){
     printf("Faça seu movimento:\n");
     Terminal::get_user_char(mvm);
-}
-
-void CommandLineGame::Setup(){
-    game.Start();
-    print_menu();
-    get_user_command();
-    Terminal::clear_screen();
 }
 
 void CommandLineGame::print_game(vector<vector<int>> board, int score){
@@ -101,6 +43,7 @@ void CommandLineGame::print_game(vector<vector<int>> board, int score){
 }
 
 void CommandLineGame::Play(){
+    game.Start();
     char move;
     while(game.is_active()){
         print_game(game.get_board(), game.get_score());
@@ -125,8 +68,6 @@ void CommandLineGame::Finish(){
     if(choice == 'y'){
         save_score();
     }
-    Setup();
-    Play();
 }
 
 void CommandLineGame::save_score(){
