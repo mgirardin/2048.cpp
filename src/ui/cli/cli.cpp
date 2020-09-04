@@ -139,6 +139,5 @@ void CommandLineGame::save_score(){
     }
     printf("Pressione enter para voltar a tela inicial.\n");
     cin.ignore();
-    cin.ignore();
     return;
 }

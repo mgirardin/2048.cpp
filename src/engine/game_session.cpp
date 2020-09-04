@@ -3,6 +3,7 @@
 #include "includes/board.hpp"
 #include "includes/ranking.hpp"
 
+#define MAX_NICKNAME_LENGTH 95
 
 bool GameSession::is_active(){
     return game_is_active;
@@ -39,10 +40,10 @@ void GameSession::Finish(){
 
 bool GameSession::Save_Score(){
     Ranking rk = Ranking();
-    printf("Score: %lld\n", board.score);
-    printf("Digite seu nickname: ");
+    cout << "Score: " << board.score << endl;
+    cout << "Digite seu nickname: ";
+    cin.ignore();
     string nickname;
-    // TODO: Fix it to accept space (whitespace)
-    cin >> nickname;
-    return rk.create_record(board.score, nickname);
+    getline(cin, nickname);
+    return rk.create_record(board.score, string(nickname));
 }
