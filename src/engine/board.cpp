@@ -1,8 +1,11 @@
 #include <unordered_map>
 #include "includes/board.hpp"
+#include "includes/game_settings.hpp"
 
 // Public methods 
 int Board::restart_board(){
+	GameSettings *gs = GameSettings::getInstance();
+	size = gs->get_board_size();
 	board = vector<vector<int>>(size, vector<int>(size));
 	int cells_to_fill = rand()%10 < 5 ? 3 : 2;
 	for(int i=0; i<=cells_to_fill-1; i++){
@@ -86,11 +89,14 @@ bool Board::no_moves(){
 
 bool Board::apply_movement(char move){
     move = tolower(move);
+	GameSettings *gs = GameSettings::getInstance();
+	char up = gs->get_key_up(), down = gs->get_key_down();
+	char left = gs->get_key_left(), right = gs->get_key_right();
 	unordered_map<char, pair<int, int>> moves = {
-		{'d', make_pair(-1,  0)}, 
-		{'a', make_pair( 1,  0)},
-		{'w', make_pair( 0,  1)},
-		{'s', make_pair( 0, -1)}
+		{right, make_pair(-1,  0)}, 
+		{left, make_pair( 1,  0)},
+		{up, make_pair( 0,  1)},
+		{down, make_pair( 0, -1)}
 	};
 	if(moves.find(move) == moves.end()){
 		return false;
