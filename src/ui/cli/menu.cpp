@@ -6,10 +6,6 @@
 #include "../includes/ranking_menu.hpp"
 using namespace std;
 
-#define COLOR_RED "\x1B[31m"
-#define COLOR_NORMAL "\x1B[0m"
-#define COLOR_GREEN "\x1B[32m"
-#define COLOR_BLUE "\x1B[36m"
 #define MENU_LINE_SIZE 70
 
 void MainMenu::print_menu_instruction(string instruction){
@@ -24,7 +20,8 @@ void MainMenu::print_menu_delimiter(string start_char, string end_char, char fil
 void MainMenu::print_menu(){    
     // TODO: Use '═' (unicode) as a filler (is it possible?)
     Terminal::clear_screen();
-    cout << COLOR_BLUE;
+    Terminal::change_foreground_color("blue");
+    Terminal::make_text_bold();
     print_menu_delimiter("╔", "╗", '*');
     cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << "2048.cpp" << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
     print_menu_delimiter("║", "║", '*');
@@ -34,7 +31,7 @@ void MainMenu::print_menu(){
     print_menu_instruction("Digite R para ver o Score Ranking");
     print_menu_instruction("Digite Q para sair do jogo");
     print_menu_delimiter("╚","╝", '-');
-    cout << COLOR_NORMAL;
+    Terminal::change_foreground_color("normal");
 }
 
 char MainMenu::get_user_option(){

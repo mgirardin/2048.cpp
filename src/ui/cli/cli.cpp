@@ -9,8 +9,6 @@
 
 #define KRED "\x1B[31m"
 #define KNRM "\x1B[0m"
-#define KGRN "\x1B[32m"
-#define KBLUE "\x1B[36m"
 #define MENU_LINE_SIZE 70
 
 CommandLineGame::CommandLineGame(): game(GameSession()){}
