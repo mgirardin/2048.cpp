@@ -61,7 +61,7 @@ void CommandLineGame::Finish(){
     Terminal::clear_screen();
 	print_game(game.get_board(), game.get_score());
 	printf("%sGame over!\n%s", KRED, KNRM);
-    printf("\n\nDeseja salvar seu resultado no ranking? (y/N)\n");
+    printf("\nDeseja salvar seu resultado no ranking? (y/N)\n");
     char choice;
     scanf("%c", &choice);
     choice = tolower(choice);
