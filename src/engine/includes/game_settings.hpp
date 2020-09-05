@@ -6,6 +6,7 @@ class GameSettings{
     static GameSettings *instance;
     int board_size = 4;
     char key_down = 's', key_up = 'w', key_left = 'a', key_right = 'd';
+    char quit_key = 'q';
     GameSettings();
 
     public:
@@ -15,6 +16,7 @@ class GameSettings{
     char get_key_up();
     char get_key_left();
     char get_key_right();
+    char get_quit_key();
 };
 
 #endif

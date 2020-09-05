@@ -1,8 +1,9 @@
-#include "../includes/ranking_menu.hpp"
-#include "../../engine/includes/ranking.hpp"
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include "../includes/ranking_menu.hpp"
+#include "../includes/terminal.hpp"
+#include "../../engine/includes/ranking.hpp"
 
 int RankingMenu::get_biggest_nickname_size(vector<pair<string, int>> ranking){
     int biggest_size = -1;
@@ -21,6 +22,6 @@ void RankingMenu::open(){
         int width = biggest_nickname_size - to_string(i+1).size() + 1;
         cout << i+1 << ")" << left << setw(width) << ranking[i].first << " - " << ranking[i].second << endl << right;
     }
-    cout << endl << "Pressione enter para voltar para a tela inicial." << endl;
+    cout << endl << "Press any key to continue." << endl;
     cin.ignore();
 }

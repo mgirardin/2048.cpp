@@ -1,5 +1,6 @@
 #include <iostream>
 #include "includes/game_session.hpp"
+#include "includes/game_settings.hpp"
 #include "includes/board.hpp"
 #include "includes/ranking.hpp"
 
@@ -26,7 +27,16 @@ void GameSession::Start(){
     board.restart_board();
 };
 
+bool GameSession::is_quit_move(char move){
+    GameSettings *gs = GameSettings::getInstance();
+    return move == gs->get_quit_key();
+}
+
 bool GameSession::make_movement(char move){
+    if(is_quit_move(move)){
+        Finish();
+        return false;
+    }
     bool movement_applied = board.apply_movement(move);
     if(movement_applied && !board.is_full()){
         board.create_cell();

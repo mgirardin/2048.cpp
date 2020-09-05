@@ -5,6 +5,7 @@
 class GameSession{
     Board board;
     bool game_is_active = true;
+    bool is_quit_move(char move);
 
     public:
     void Start();

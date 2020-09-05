@@ -30,3 +30,7 @@ char GameSettings::get_key_left(){
 char GameSettings::get_key_right(){
     return key_right;
 }
+
+char GameSettings::get_quit_key(){
+    return quit_key;
+}
