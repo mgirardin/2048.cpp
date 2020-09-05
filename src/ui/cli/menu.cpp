@@ -37,7 +37,7 @@ void MainMenu::print_menu(){
     print_menu_delimiter("╔", "╗", '*');
     cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << "2048.cpp" << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
     print_menu_delimiter("║", "║", '*');
-    print_menu_instruction("Objetivo: Montar um quadrado de valor 2048");
+    print_menu_instruction("Goal: Merge blocks to gain points");
     print_menu_instruction("Use W/A and Enter to select your option");
     print_menu_options();
     print_menu_delimiter("╚","╝", '-');

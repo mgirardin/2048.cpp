@@ -14,7 +14,7 @@
 CommandLineGame::CommandLineGame(): game(GameSession()){}
 
 void CommandLineGame::get_user_movement(char* mvm){
-    printf("Faça seu movimento:\n");
+    printf("Make your move:\n");
     Terminal::get_user_char(mvm);
 }
 
@@ -59,7 +59,7 @@ void CommandLineGame::Finish(){
     Terminal::clear_screen();
 	print_game(game.get_board(), game.get_score());
 	printf("%sGame over!\n%s", KRED, KNRM);
-    printf("\nDeseja salvar seu resultado no ranking? (y/N)\n");
+    printf("\nDo you want to save your result? (y/N)\n");
     char choice;
     scanf("%c", &choice);
     choice = tolower(choice);
@@ -71,12 +71,12 @@ void CommandLineGame::Finish(){
 void CommandLineGame::save_score(){
     Terminal::clear_screen();
     if(game.Save_Score()){
-        printf("Score salvo com sucesso!\n\n");
+        printf("Score saved!\n\n");
     }
     else{
-        printf("Erro ao salvar score :(\n\n");
+        printf("Error saving score :(\n\n");
     }
-    printf("Pressione enter para voltar a tela inicial.\n");
+    printf("Press enter to continue.\n");
     cin.ignore();
     return;
 }
