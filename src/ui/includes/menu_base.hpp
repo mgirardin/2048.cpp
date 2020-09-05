@@ -57,7 +57,7 @@ class MenuBase{
         int left_division = (MENU_LINE_SIZE-title.size())/2;
         int right_division = (MENU_LINE_SIZE-title.size()-left_division);
         print_menu_delimiter("╔", "╗", '*');
-        cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << title << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
+        cout << "║" << setw(left_division) << "" << title << setw(right_division) << "║" << endl;
         print_menu_delimiter("║", "║", '*');
     }
 };
