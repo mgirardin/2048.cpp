@@ -22,6 +22,6 @@ void RankingMenu::open(){
         int width = biggest_nickname_size - to_string(i+1).size() + 1;
         cout << i+1 << ")" << left << setw(width) << ranking[i].first << " - " << ranking[i].second << endl << right;
     }
-    cout << endl << "Press any key to continue." << endl;
+    cout << endl << "Press enter to continue." << endl;
     cin.ignore();
 }

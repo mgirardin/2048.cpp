@@ -1,9 +1,10 @@
 #include <iostream>
 #include <iomanip>
-#include "../includes/menu.hpp"
+#include "../includes/main_menu.hpp"
 #include "../includes/terminal.hpp"
 #include "../includes/cli.hpp"
 #include "../includes/ranking_menu.hpp"
+#include "../includes/settings_menu.hpp"
 using namespace std;
 
 #define MENU_LINE_SIZE 70
@@ -78,6 +79,12 @@ void MainMenu::run_option(char option){
                 break;
             }
             case 2:
+            {
+                SettingsMenu sm = SettingsMenu();
+                sm.open();
+                break;
+            }
+            case 3:
             {
                 exit(0);
             }   

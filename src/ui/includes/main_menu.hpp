@@ -5,7 +5,7 @@
 using namespace std;
 
 class MainMenu{
-    vector<string> options = {"Start game", "Score ranking", "Quit"};
+    vector<string> options = {"Start game", "Score ranking", "Settings", "Quit"};
     int choice = 0;
     void print_menu_instruction(string instruction, string next_color, string previous_color);
     void print_menu_delimiter(string start_char, string end_char, char fill);
