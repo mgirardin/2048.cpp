@@ -21,7 +21,10 @@ void Terminal::get_user_char(char* c){
         #error Not ready for Windows
     #else
         system("/bin/stty raw");
-        scanf(" %c", c);
+        scanf("%c", c);
+        if(*c <= 13){
+            *c = '\n';
+        }
         system ("/bin/stty cooked");
     #endif
 }

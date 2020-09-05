@@ -8,13 +8,25 @@ using namespace std;
 
 #define MENU_LINE_SIZE 70
 
-void MainMenu::print_menu_instruction(string instruction){
-    cout << "║" << left << setw(57) << "  --  " + instruction << right << setw(MENU_LINE_SIZE-57) << "--  ║" << endl;
+void MainMenu::print_menu_instruction(string instruction, string next_color = "blue", string previous_color = "blue"){
+    cout << "║  --  ";
+    Terminal::change_foreground_color(next_color);
+    cout << left << setw(51) << instruction;
+    Terminal::change_foreground_color(previous_color);
+    cout << right << setw(MENU_LINE_SIZE-57) << "--  ║" << endl;
 }
 
 void MainMenu::print_menu_delimiter(string start_char, string end_char, char fill){
     cout << start_char << setfill(fill) << setw(MENU_LINE_SIZE) << end_char << endl;
     cout << setfill(' ');
+}
+
+void MainMenu::print_menu_options(){
+    for(int i=0; i<options.size(); i++){
+        string color = i == choice ? "green" : "blue";
+        string previous_color = "blue";
+        print_menu_instruction(options[i], color, previous_color);
+    }
 }
 
 void MainMenu::print_menu(){    
@@ -26,10 +38,8 @@ void MainMenu::print_menu(){
     cout << "║" << setw(MENU_LINE_SIZE/2-5) << "" << "2048.cpp" << setw(MENU_LINE_SIZE/2-3) << "║" << endl;
     print_menu_delimiter("║", "║", '*');
     print_menu_instruction("Objetivo: Montar um quadrado de valor 2048");
-    print_menu_instruction("Comandos: W/A/S/D");
-    print_menu_instruction("Digite S para comecar o jogo");
-    print_menu_instruction("Digite R para ver o Score Ranking");
-    print_menu_instruction("Digite Q para sair do jogo");
+    print_menu_instruction("Use W/A and Enter to select your option");
+    print_menu_options();
     print_menu_delimiter("╚","╝", '-');
     Terminal::change_foreground_color("normal");
 }
@@ -41,18 +51,37 @@ char MainMenu::get_user_option(){
     return start;
 }
 
+// TODO: Refactor this 
 void MainMenu::run_option(char option){
     Terminal::clear_screen();
-    if(option == 's'){
-        CommandLineGame clg = CommandLineGame();
-        clg.Play();
+    if(option == 'w'){
+        choice = choice>0 ? choice-1 : choice;
     }
-    else if(option == 'r'){
-        RankingMenu rm = RankingMenu();
-        rm.open();
+    else if(option == 's'){
+        choice = choice<options.size()-1 ? choice+1 : choice;
     }
     else if(option == 'q'){
         exit(0);
+    }
+    else if(option == '\n'){
+        switch(choice){
+            case 0:
+            {
+                CommandLineGame clg = CommandLineGame();
+                clg.Play();
+                break;
+            }
+            case 1:
+            {
+                RankingMenu rm = RankingMenu();
+                rm.open();
+                break;
+            }
+            case 2:
+            {
+                exit(0);
+            }   
+        }
     }
 }
 
