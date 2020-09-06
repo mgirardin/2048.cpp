@@ -10,7 +10,7 @@ class RankingMenu: public MenuBase{
     void run_option(char option){};
     void print_menu();
     public: 
-    void open();
+    void display();
 };
 
 #endif

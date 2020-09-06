@@ -2,7 +2,7 @@
 #include <iomanip>
 #include "../includes/main_menu.hpp"
 #include "../includes/terminal.hpp"
-#include "../includes/cli.hpp"
+#include "../includes/game_screen.hpp"
 #include "../includes/ranking_menu.hpp"
 #include "../includes/settings_menu.hpp"
 using namespace std;
@@ -36,20 +36,20 @@ void MainMenu::run_option(char option){
         switch(choice){
             case 0:
             {
-                CommandLineGame clg = CommandLineGame();
-                clg.Play();
+                GameScreen clg = GameScreen();
+                clg.display();
                 break;
             }
             case 1:
             {
                 RankingMenu rm = RankingMenu();
-                rm.open();
+                rm.display();
                 break;
             }
             case 2:
             {
                 SettingsMenu sm = SettingsMenu();
-                sm.open();
+                sm.display();
                 break;
             }
             case 3:

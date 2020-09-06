@@ -5,13 +5,14 @@
 #include <iomanip>
 #include <iostream>
 #include "terminal.hpp"
+#include "screen_base.hpp"
 using namespace std;
 
 #define MENU_LINE_SIZE 70
 
-class MenuBase{
+class MenuBase: ScreenBase{
     public:
-    virtual void open(){
+    virtual void display(){
         while(true){
             print_menu();
             char option = get_user_option();

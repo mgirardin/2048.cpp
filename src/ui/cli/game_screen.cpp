@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <iostream>
 #include <iomanip>
-#include "../includes/cli.hpp"
+#include "../includes/game_screen.hpp"
 #include "../../engine/includes/ranking.hpp"
 #include "../includes/terminal.hpp"
 
@@ -11,14 +11,14 @@
 #define KNRM "\x1B[0m"
 #define MENU_LINE_SIZE 70
 
-CommandLineGame::CommandLineGame(): game(GameSession()){}
+GameScreen::GameScreen(): game(GameSession()){}
 
-void CommandLineGame::get_user_movement(char* mvm){
+void GameScreen::get_user_movement(char* mvm){
     printf("Make your move:\n");
     Terminal::get_user_char(mvm);
 }
 
-void CommandLineGame::print_game(vector<vector<int>> board, int score){
+void GameScreen::print_game(vector<vector<int>> board, int score){
     int board_size = board.size();
     int max_cell_value = INT32_MIN;
     for(int i=0; i<board_size; i++){
@@ -40,7 +40,7 @@ void CommandLineGame::print_game(vector<vector<int>> board, int score){
 	printf("Score: %d\n", score);
 }
 
-void CommandLineGame::Play(){
+void GameScreen::display(){
     game.Start();
     char move;
     while(game.is_active()){
@@ -55,7 +55,7 @@ void CommandLineGame::Play(){
     Finish();
 }
 
-void CommandLineGame::Finish(){
+void GameScreen::Finish(){
     Terminal::clear_screen();
 	print_game(game.get_board(), game.get_score());
 	printf("%sGame over!\n%s", KRED, KNRM);
@@ -68,7 +68,7 @@ void CommandLineGame::Finish(){
     }
 }
 
-void CommandLineGame::save_score(){
+void GameScreen::save_score(){
     Terminal::clear_screen();
     if(game.Save_Score()){
         printf("Score saved!\n\n");

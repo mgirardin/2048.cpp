@@ -35,6 +35,6 @@ void RankingMenu::print_menu(){
     cin.ignore();
 }
 
-void RankingMenu::open(){
+void RankingMenu::display(){
     print_menu();
 }

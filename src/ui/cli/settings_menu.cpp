@@ -48,7 +48,7 @@ void SettingsMenu::run_option(char option){
     }
 }
 
-void SettingsMenu::open(){
+void SettingsMenu::display(){
         while(settings_menu_is_open){
             print_menu();
             char option = get_user_option();

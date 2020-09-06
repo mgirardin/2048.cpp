@@ -1,9 +1,10 @@
-#ifndef _cli_h
-#define _cli_h 
+#ifndef _game_screen_h
+#define _game_screen_h 
 #include <string>
+#include "screen_base.hpp"
 #include "../../engine/includes/game_session.hpp"
 
-class CommandLineGame{
+class GameScreen: ScreenBase{
     GameSession game;
 
     void get_user_movement(char* mvm);
@@ -12,8 +13,8 @@ class CommandLineGame{
     void save_score();
 
     public:
-    CommandLineGame();
-    void Play();
+    GameScreen();
+    void display();
 };
 
 #endif

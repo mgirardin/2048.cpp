@@ -11,7 +11,7 @@ class SettingsMenu: public MenuBase{
     void run_option(char option);
 
     public: 
-    void open();
+    void display();
     SettingsMenu(){
         options = {"Board size", "Keyboard settings", "Go back to main menu"};
     };
