@@ -13,6 +13,7 @@ WIP
 ### Requirements
 
 * C++11 compiler (e.g. `g++`)
+* Unix environment (for now)
 * CMake
 
 ### Build
