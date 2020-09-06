@@ -25,13 +25,12 @@ void RankingMenu::print_menu(){
     for(int i=0; i<ranking.size(); i++){
         int width = biggest_nickname_size - to_string(i+1).size() + 1;
         stringstream ss;
-        ss <<  i+1 << ")" << left << setw(width) << ranking[i].first << " : " << ranking[i].second << right;
+        ss <<  i+1 << ") " << left << setw(width) << ranking[i].first << " : " << ranking[i].second << right;
         string record = ss.str();
         print_menu_instruction(record); 
-        //cout << i+1 << ")" << left << setw(width) << ranking[i].first << " - " << ranking[i].second << endl << right;
     }
     print_menu_delimiter("╚","╝", '-');
-    cout << endl << "Press enter to continue." << endl;
+    cout << endl << " Press enter to continue." << endl;
     Terminal::change_foreground_color("normal");
     cin.ignore();
 }
