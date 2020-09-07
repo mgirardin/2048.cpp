@@ -2,7 +2,7 @@
 #define _ranking_screen_h 
 #include <string>
 #include <vector>
-#include "menu_base.hpp"
+#include "../menus/menu_base.hpp"
 using namespace std;
 
 //TODO: Implement ScreenBase instead of MenuBase
@@ -14,7 +14,7 @@ class RankingScreen: public MenuBase{
     public: 
     RankingScreen(){
         description = "Score ranking";
-    }
+    };
     void display();
 };
 

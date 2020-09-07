@@ -3,9 +3,9 @@
 #include <ctype.h>
 #include <iostream>
 #include <iomanip>
-#include "../includes/game_screen.hpp"
-#include "../../engine/includes/ranking.hpp"
-#include "../includes/terminal.hpp"
+#include "../../includes/screens/game_screen.hpp"
+#include "../../../engine/includes/ranking.hpp"
+#include "../../includes/terminal.hpp"
 
 #define KRED "\x1B[31m"
 #define KNRM "\x1B[0m"

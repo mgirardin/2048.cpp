@@ -3,10 +3,10 @@
 #include <string>
 #include <vector>
 #include "menu_base.hpp"
-#include "game_screen.hpp"
-#include "ranking_screen.hpp"
+#include "../screens/game_screen.hpp"
+#include "../screens/ranking_screen.hpp"
 #include "settings_menu.hpp"
-#include "quit_menu.hpp"
+#include "../screens/quit_screen.hpp"
 using namespace std;
 
 class MainMenu: public MenuBase{

@@ -2,8 +2,8 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include "../includes/settings_menu.hpp"
-#include "../includes/terminal.hpp"
+#include "../../includes/menus/settings_menu.hpp"
+#include "../../includes/terminal.hpp"
 
 void SettingsMenu::print_menu(){
     Terminal::clear_screen();

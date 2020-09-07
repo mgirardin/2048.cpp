@@ -2,9 +2,9 @@
 #include <iomanip>
 #include <vector>
 #include <sstream>
-#include "../includes/ranking_screen.hpp"
-#include "../includes/terminal.hpp"
-#include "../../engine/includes/ranking.hpp"
+#include "../../includes/screens/ranking_screen.hpp"
+#include "../../includes/terminal.hpp"
+#include "../../../engine/includes/ranking.hpp"
 
 int RankingScreen::get_biggest_nickname_size(vector<pair<string, int>> ranking){
     int biggest_size = -1;

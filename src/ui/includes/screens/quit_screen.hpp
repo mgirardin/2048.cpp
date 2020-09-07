@@ -1,5 +1,5 @@
-#ifndef _quit_menu_hpp
-#define _quit_menu_hpp
+#ifndef _quit_screen_hpp
+#define _quit_screen_hpp
 #include "screen_base.hpp"
 
 class QuitScreen: public ScreenBase{

@@ -4,8 +4,8 @@
 #include <vector>
 #include <iomanip>
 #include <iostream>
-#include "terminal.hpp"
-#include "screen_base.hpp"
+#include "../terminal.hpp"
+#include "../screens/screen_base.hpp"
 using namespace std;
 
 #define MENU_LINE_SIZE 70
