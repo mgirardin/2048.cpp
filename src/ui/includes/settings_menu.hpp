@@ -6,14 +6,13 @@
 using namespace std;
 
 class SettingsMenu: public MenuBase{
-    bool settings_menu_is_open = true;
     void print_menu();
-    void run_option(char option);
 
     public: 
-    void display();
     SettingsMenu(){
-        options = {"Board size", "Keyboard settings", "Go back to main menu"};
+        description = "Settings";
+        options = {};
+        //options = {"Board size", "Keyboard settings", "Go back to main menu"};
     };
 };
 

@@ -4,7 +4,7 @@
 #include "screen_base.hpp"
 #include "../../engine/includes/game_session.hpp"
 
-class GameScreen: ScreenBase{
+class GameScreen: public ScreenBase{
     GameSession game;
 
     void get_user_movement(char* mvm);

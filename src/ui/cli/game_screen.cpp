@@ -11,7 +11,9 @@
 #define KNRM "\x1B[0m"
 #define MENU_LINE_SIZE 70
 
-GameScreen::GameScreen(): game(GameSession()){}
+GameScreen::GameScreen(): game(GameSession()){
+    description = "Start game";
+}
 
 void GameScreen::get_user_movement(char* mvm){
     printf("Make your move:\n");

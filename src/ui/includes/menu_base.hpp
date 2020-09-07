@@ -10,27 +10,57 @@ using namespace std;
 
 #define MENU_LINE_SIZE 70
 
-class MenuBase: ScreenBase{
+class MenuBase: public ScreenBase{
     public:
     virtual void display(){
-        while(true){
+        while(is_main_menu || is_menu_open){
             print_menu();
             char option = get_user_option();
             run_option(option);
         }
+        is_menu_open = true;
+        choice = 0;
     }
 
     protected:
-    vector<string> options = {};
+    vector<ScreenBase*> options = {};
     int choice = 0;
-    virtual void run_option(char option) = 0;
+    bool is_main_menu = false;
+    bool is_menu_open = true;
+
+    virtual void run_option(char option){
+        Terminal::clear_screen();
+        if(option == 'w'){
+            choice = choice>0 ? choice-1 : choice;
+        }
+        else if(option == 's'){
+            int options_size = options.empty() ? 0 : options.size();
+            choice = choice<(options_size-1) ? choice+1 : choice;
+        }
+        else if(option == 'q'){
+            exit(0);
+        }
+        else if(option == '\n'){
+            if(choice == options.size()){
+                is_menu_open = false;
+                return;
+            }
+            options[choice]->display();
+        }
+    };
+
     virtual void print_menu() = 0;
     
     virtual void print_menu_options(){
         for(int i=0; i<options.size(); i++){
             string color = i == choice ? "green" : "blue";
             string previous_color = "blue";
-            print_menu_instruction(options[i], color, previous_color);
+            print_menu_instruction(options[i]->description, color, previous_color);
+        }
+        if(is_main_menu == false){
+            string color = options.size() == choice ? "green" : "blue";
+            string previous_color = "blue";
+            print_menu_instruction("Go back to previous menu", color, previous_color);
         }
     };
 
