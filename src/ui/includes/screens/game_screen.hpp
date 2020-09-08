@@ -11,6 +11,9 @@ class GameScreen: public ScreenBase{
     void Finish();    
     void print_game(vector<vector<int>>, int score);
     void save_score();
+    void print_text_centered(string text);
+    void print_title(string title);
+    void print_title_delimiter(string start_char, string end_char, char fill);
 
     public:
     GameScreen();

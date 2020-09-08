@@ -37,9 +37,6 @@ class MenuBase: public ScreenBase{
             int options_size = options.empty() ? 0 : options.size();
             choice = choice<(options_size-1) ? choice+1 : choice;
         }
-        else if(option == 'q'){
-            exit(0);
-        }
         else if(option == '\n'){
             if(choice == options.size()){
                 is_menu_open = false;
@@ -84,11 +81,15 @@ class MenuBase: public ScreenBase{
         return start;
     }
 
+    void print_text_centered(string text){
+        int left_division = (MENU_LINE_SIZE-text.size())/2;
+        int right_division = (MENU_LINE_SIZE-text.size()-left_division);
+        cout << "║" << setw(left_division) << "" << text << setw(right_division) << "║" << endl;
+    }
+
     void print_menu_title(string title){
-        int left_division = (MENU_LINE_SIZE-title.size())/2;
-        int right_division = (MENU_LINE_SIZE-title.size()-left_division);
         print_menu_delimiter("╔", "╗", '*');
-        cout << "║" << setw(left_division) << "" << title << setw(right_division) << "║" << endl;
+        print_text_centered(title);
         print_menu_delimiter("║", "║", '*');
     }
 };

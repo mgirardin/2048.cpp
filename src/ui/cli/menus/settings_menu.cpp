@@ -15,3 +15,9 @@ void SettingsMenu::print_menu(){
     print_menu_delimiter("╚","╝", '-');
     Terminal::change_foreground_color("normal");
 }
+
+SettingsMenu::SettingsMenu(){
+        description = "Settings";
+        options = {};
+        //options = {"Board size", "Keyboard settings"};
+    };

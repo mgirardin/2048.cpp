@@ -9,11 +9,7 @@ class SettingsMenu: public MenuBase{
     void print_menu();
 
     public: 
-    SettingsMenu(){
-        description = "Settings";
-        options = {};
-        //options = {"Board size", "Keyboard settings", "Go back to main menu"};
-    };
+    SettingsMenu();
 };
 
 #endif
