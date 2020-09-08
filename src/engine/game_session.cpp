@@ -51,7 +51,7 @@ void GameSession::Finish(){
 bool GameSession::Save_Score(){
     Ranking rk = Ranking();
     cout << "Score: " << board.score << endl;
-    cout << "Digite seu nickname: ";
+    cout << "Write your nickname: ";
     cin.ignore();
     string nickname;
     getline(cin, nickname);
