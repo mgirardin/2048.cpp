@@ -6,7 +6,9 @@
 Fully configurable CLI version of the game 2048
 
 
-WIP
+## Demo
+
+![2048 Demo](assets/readme/2048.gif)
 
 ## Setup
 
