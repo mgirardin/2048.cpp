@@ -7,17 +7,16 @@
 using namespace std;
 
 void Terminal::clear_screen(){
-    #ifdef WINDOWS
+    #ifdef _WIN32
         system("cls");
-        #error Not ready for Windows
     #else
         system("clear");
     #endif
 }
 
 void Terminal::get_user_char(char* c){
-    #ifdef WINDOWS
-        // TODO: Implement this to Windows 
+    #ifdef _WIN32
+        // TODO: Implement this to Windows
         #error Not ready for Windows
     #else
         system("/bin/stty raw");
