@@ -4,6 +4,9 @@
 #include <algorithm>
 #include "../includes/terminal.hpp"
 #include "../../../libraries/termcolor/termcolor.hpp"
+#ifdef _WIN32
+    #include "conio.h"
+#endif
 using namespace std;
 
 void Terminal::clear_screen(){
@@ -16,8 +19,10 @@ void Terminal::clear_screen(){
 
 void Terminal::get_user_char(char* c){
     #ifdef _WIN32
-        // TODO: Implement this to Windows
-        #error Not ready for Windows
+        *c = getch();
+        if(*c <= 13){
+            *c = '\n';
+        }
     #else
         system("/bin/stty raw");
         scanf("%c", c);
